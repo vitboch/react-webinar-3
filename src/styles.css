@@ -37,7 +37,8 @@ body {
 .Item {
   display: flex;
   justify-content: flex-start;
-  transition: background-color 1s;
+  align-items: center;
+  transition: background-color 1s ease-in-out;
 }
 
 .Item_selected {
@@ -50,12 +51,12 @@ body {
 }
 
 .Item-title {
-  width: 100%;
-  padding: 20px 10px;
+  padding: 20px 0 20px 10px;
 }
 
 .Item-actions {
   display: flex;
   justify-content: flex-end;
+  margin-left: auto;
   padding: 20px 20px 20px 10px;
 }
