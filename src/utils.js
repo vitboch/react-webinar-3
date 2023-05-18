@@ -37,6 +37,7 @@ export const generateCode1 = (function (start = 0) {
       yield ++start;
     }
   }
+
   const gen = realGenerator(start);
   return () => gen.next().value;
 }());
@@ -48,4 +49,15 @@ export const generateCode1 = (function (start = 0) {
  */
 export function generateCode2() {
   return generateCode2.value ? ++generateCode2.value : generateCode2.value = 1;
+}
+
+/**
+ * Конструктор объектов, включающих языка-зависимое форматирование чисел
+ * @returns {String}
+ */
+export function formatMoney(number) {
+  return new Intl.NumberFormat('ru', {
+    style: 'currency',
+    currency: 'RUB'
+  }).format(number).slice(0, -5) + ' ₽';
 }

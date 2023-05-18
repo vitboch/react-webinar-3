@@ -1,8 +1,28 @@
+@font-face {
+  font-family: "Arial";
+  src: local("Arial"),
+  url("../../fonts/Arial.woff2") format("woff2"),
+  url("../../fonts/Arial.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Arial";
+  src: local("Arial-Bold"),
+  url("../../fonts/ArialBold.woff2") format("woff2"),
+  url("../../fonts/ArialBold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   margin: 0;
   padding: 0;
   background: #535353;
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .PageLayout {

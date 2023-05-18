@@ -1,0 +1,31 @@
+.Modal {
+  position: absolute;
+  margin: auto;
+  max-width: 960px;
+  min-height: 400px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.Modal-title {
+  padding: 20px 10px;
+}
+
+.Modal-actions {
+  margin-left: auto;
+  padding: 20px 20px 20px 10px;
+}
+
+.Modal-block {
+  height: 63px;
+}
+
+.Modal-total {
+  display: flex;
+  gap: 20px;
+  justify-content: end;
+  padding: 20px 100px;
+}
