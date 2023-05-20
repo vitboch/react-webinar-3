@@ -4,10 +4,10 @@ import {formatMoney} from '../../utils';
 import './style.css';
 
 function Item(props) {
-  const callbacks = {
-    onAction: (e) => {
+  const callback = {
+    onClick: (e) => {
       e.stopPropagation();
-      props.onAction(props.item.code);
+      props.onClick(props.item.code);
     }
   }
 
@@ -16,12 +16,9 @@ function Item(props) {
       <div className='Item-code'>{props.item.code}</div>
       <div className='Item-title'>{props.item.title}</div>
       <div className='Item-price'>{formatMoney(props.item.price)}</div>
-      {props.item.count && (
-        <div className='Item-count'>{props.item.count} шт</div>
-      )}
       <div className='Item-actions'>
-        <button onClick={callbacks.onAction}>
-          {props.buttonName}
+        <button onClick={callback.onClick}>
+          Добавить
         </button>
       </div>
     </div>
@@ -33,10 +30,8 @@ Item.propTypes = {
     code: PropTypes.number,
     title: PropTypes.string,
     price: PropTypes.number,
-    count: PropTypes.number,
   }).isRequired,
-  onAction: PropTypes.func,
-  buttonName: PropTypes.string
-};
+  onClick: PropTypes.func,
+}
 
 export default React.memo(Item);

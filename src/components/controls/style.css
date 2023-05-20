@@ -1,5 +1,38 @@
 .Controls {
   display: flex;
   justify-content: flex-end;
-  padding: 20px;
+  /*padding: 20px;*/
+}
+
+.Controls-title {
+  padding: 20px 10px;
+}
+
+.Controls-text {
+  padding-left: 12px;
+  font-weight: 700;
+}
+
+.Controls-actions {
+  padding: 20px 20px 20px 10px;
+}
+
+.Controls-btn {
+  padding: 0 12px;
+}
+
+.Modal-actions {
+  margin-left: auto;
+  padding: 20px 20px 20px 10px;
+}
+
+.Modal-block {
+  height: 63px;
+}
+
+.Modal-amount {
+  display: flex;
+  gap: 20px;
+  justify-content: end;
+  padding: 20px 100px;
 }

@@ -1,8 +1,9 @@
 import React, {useCallback} from 'react';
 import List from './components/list';
+import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
-import Cart from './components/cart';
+import Item from './components/item';
 
 /**
  * Приложение
@@ -10,7 +11,10 @@ import Cart from './components/cart';
  * @returns {React.ReactElement}
  */
 function App({store}) {
-  const {list, cart} = store.getState();
+  const {list} = store.getState();
+  const cart = store.getItem()
+  const quantity = store.getQuantity()
+  const amount = store.getAmount()
 
   const callbacks = {
     onDeleteItem: useCallback((code) => {
@@ -25,12 +29,8 @@ function App({store}) {
   return (
     <PageLayout>
       <Head title='Магазин'/>
-      <Cart list={cart} onDeleteItem={callbacks.onDeleteItem}/>
-      <List
-        list={list}
-        onAction={callbacks.onAddItem}
-        buttonName='Добавить'
-      />
+      <Controls cart={cart} quantity={quantity} amount={amount} onClick={callbacks.onDeleteItem}/>
+      <List list={list} Item={Item} onClick={callbacks.onAddItem}/>
     </PageLayout>
   );
 }

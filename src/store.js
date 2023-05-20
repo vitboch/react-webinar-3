@@ -5,6 +5,8 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.amount = 0;
+    this.quantity = 0;
   }
 
   /**
@@ -29,6 +31,36 @@ class Store {
   }
 
   /**
+   * Выбор состояния корзины
+   * @returns {Array}
+   */
+  getItem() {
+    return this.state.list.filter(item => item.count > 0) || [];
+  }
+
+  /**
+   * Получение количества
+   * @returns {Number}
+   */
+  getQuantity() {
+    this.quantity = 0
+    this.state.list.forEach(item => {
+      if (item.selected !== undefined && item.selected) {
+        this.quantity++
+      }
+    })
+    return this.quantity
+  }
+
+  /**
+   * Получение суммы
+   * @returns {Number}
+   */
+  getAmount() {
+    return this.getItem().reduce((acc, item) => acc + item.price * item.count, 0);
+  }
+
+  /**
    * Установка состояния
    * @param newState {Object}
    */
@@ -39,34 +71,44 @@ class Store {
   }
 
   /**
-   * Добавление новой записи
+   * Добавление товара по коду
+   * @param code
    */
   addItem(code) {
-    const cart = [...this.state.cart]
-    const element = cart.find(item => item.code === code)
-
-    if (element) {
-      ++element.count
-    } else {
-      const item = this.state.list.find(item => item.code === code)
-      cart.push({...item, count: 1})
-    }
-
     this.setState({
       ...this.state,
-      cart
+      list: this.state.list.map(item => {
+        if (item.code === code) {
+          return {
+            ...item,
+            selected: true,
+            count: item.count + 1 || 1,
+          };
+        }
+        return item
+      })
     })
   };
 
   /**
-   * Удаление записи по коду
+   * Удаление товара по коду
    * @param code
    */
   deleteItem(code) {
+
     this.setState({
-      ...this.state,
-      cart: this.state.cart.filter(item => item.code !== code)
-    })
+        ...this.state,
+      list: this.state.list.map(item => {
+          if (item.code === code) {
+            return {
+              ...item,
+              selected: !item.selected,
+              count: 0,
+            };
+          }
+          return item
+        })
+      })
   };
 }
 

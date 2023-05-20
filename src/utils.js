@@ -58,6 +58,7 @@ export function generateCode2() {
 export function formatMoney(number) {
   return new Intl.NumberFormat('ru', {
     style: 'currency',
-    currency: 'RUB'
-  }).format(number).slice(0, -5) + ' ₽';
+    currency: 'RUB',
+    maximumFractionDigits: 0,
+  }).format(number);
 }
