@@ -1,0 +1,21 @@
+.Pagination-list {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 0;
+    padding: 22px;
+    list-style: none;
+}
+
+.Pagination-link {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.Pagination-active {
+    color: #fff;
+    background-color: #0087E9;
+}

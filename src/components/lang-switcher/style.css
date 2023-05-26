@@ -1,0 +1,14 @@
+.LangSwitcher {
+    align-items: center;
+    margin-left: auto;
+    padding: 20px;
+}
+
+.LangSwitcher-btn {
+    cursor: pointer;
+}
+
+.LangSwitcher-btn:not(:last-child) {
+    margin-right: 10px;
+    cursor: pointer;
+}

@@ -6,6 +6,13 @@
   font-size: 18px;
 }
 
+.BasketTool-link{
+  margin-right: auto;
+  font-weight: 400;
+  line-height: 21px;
+  color: #0087E9;
+}
+
 .BasketTool-label{
 
 }

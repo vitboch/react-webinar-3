@@ -1,21 +1,26 @@
-import {memo} from "react";
+import {memo} from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
-import {numberFormat, plural} from "../../utils";
+import {numberFormat, plural} from '../../utils';
+import {useTranslation} from '../../store/translator';
 import './style.css';
 
 function BasketTool({sum, amount, onOpen}) {
   const cn = bem('BasketTool');
+  const { translate } = useTranslation();
+
   return (
     <div className={cn()}>
-      <span className={cn('label')}>В корзине:</span>
+      <Link className={cn('link')} to='/'>{translate('home')}</Link>
+      <span className={cn('label')}>{translate('inBasket')}</span>
       <span className={cn('total')}>
         {amount
-          ? `${amount} ${plural(amount, {one:'товар', few:'товара', many:'товаров'})} / ${numberFormat(sum)} ₽`
-          : `пусто`
+          ? `${amount} ${plural(amount, translate('inBasketItem'))} / ${numberFormat(sum)} ₽`
+          : translate('empty')
         }
       </span>
-      <button onClick={onOpen}>Перейти</button>
+      <button onClick={onOpen}>{translate('goTo')}</button>
     </div>
   );
 }
