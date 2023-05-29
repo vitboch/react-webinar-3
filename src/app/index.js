@@ -1,20 +1,23 @@
-import {useRoutes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import Basket from './basket';
 import useSelector from '../store/use-selector';
-import routes from '../routes';
-import './style.css';
+import appRoutes from '../appRoutes';
+import Main from './main';
+import Product from './product';
 
 /**
  * Приложение
  * @returns {React.ReactElement}
  */
 function App() {
-  const elements = useRoutes(routes)
   const activeModal = useSelector(state => state.modals.name);
 
   return (
     <>
-      {elements}
+      <Routes>
+        <Route path={appRoutes.main} element={<Main/>}/>
+        <Route path={appRoutes.product()} element={<Product/>}/>
+      </Routes>
       {activeModal === 'basket' && <Basket/>}
     </>
   );

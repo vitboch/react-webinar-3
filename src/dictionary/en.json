@@ -9,5 +9,7 @@
   "close": "Сlose",
   "basket": "Basket",
   "total": "Total",
-  "delete": "Delete"
+  "delete": "Delete",
+  "piece": "pc.",
+  "pieces": "pcs."
 }

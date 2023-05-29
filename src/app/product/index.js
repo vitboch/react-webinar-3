@@ -1,12 +1,11 @@
 import {memo, useCallback, useEffect} from 'react';
-import Head from '../../components/head';
-import BasketTool from '../../components/basket-tool';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import PageLayout from '../../components/page-layout';
 import {useParams} from 'react-router-dom';
 import CardProduct from '../../components/card-product';
 import Loader from '../../components/loader';
+import NavigationMenu from '../../components/navigation-menu';
 
 function Product() {
   const store = useStore();
@@ -14,15 +13,14 @@ function Product() {
 
   useEffect(() => {
     store.actions.product.loadProduct(productId);
-  }, []);
+  }, [productId]);
 
-  const {amount, sum} = useSelector(state => ({
+  const {amount, sum, product} = useSelector(state => ({
+    state: state,
     amount: state.basket.amount,
     sum: state.basket.sum,
+    product: state.product.result,
   }));
-
-  const product = useSelector(state => state.product.result);
-
 
   const callbacks = {
     // Добавление в корзину
@@ -31,16 +29,16 @@ function Product() {
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
   }
 
-
   return (
     <PageLayout>
       {product ? (
         <>
-          <Head title={product.title}/>
-          <BasketTool
-            onOpen={callbacks.openModalBasket}
+          <NavigationMenu
+            title={product.title}
+            sum={sum}
             amount={amount}
-            sum={sum}/>
+            onOpen={callbacks.openModalBasket}
+          />
           <CardProduct
             description={product.description}
             madeInTitle={product.madeIn.title}
@@ -53,10 +51,7 @@ function Product() {
         </>
       ) : (<Loader/>)}
     </PageLayout>
-
   )
-
-
 }
 
 export default memo(Product);
