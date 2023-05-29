@@ -7,7 +7,8 @@ import useSelector from '../../store/use-selector';
 import Pagination from '../../components/pagination';
 import {useTranslation} from '../../store/translator';
 import appRoutes from "../../appRoutes";
-import NavigationMenu from '../../components/navigation-menu';
+import Head from '../../components/head';
+import BasketTool from '../../components/basket-tool';
 
 function Main() {
   const store = useStore();
@@ -42,11 +43,11 @@ function Main() {
 
   return (
     <PageLayout>
-      <NavigationMenu
-        title={translate('shop')}
+      <Head title={translate('shop')}/>
+      <BasketTool
         sum={select.sum}
-        onOpen={callbacks.openModalBasket}
         amount={select.amount}
+        onOpen={callbacks.openModalBasket}
       />
       <List list={select.list} renderItem={renders.item}/>
       <Pagination

@@ -1,31 +1,31 @@
 import {memo} from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Head from '../head';
-import BasketTool from '../basket-tool';
+import {cn as bem} from '@bem-react/classname';
+import {useTranslation} from '../../store/translator';
 import './style.css';
 
-function NavigationMenu({title, sum, amount, onOpen}) {
+function NavigationMenu({navLinks}) {
+  const cn = bem('NavigationMenu');
+  const {translate} = useTranslation();
 
   return (
-    <>
-      <Head title={title}/>
-      <BasketTool
-        sum={sum}
-        amount={amount}
-        onOpen={onOpen}/>
-    </>
+    <ul className={cn()}>
+      {navLinks.map((link, index) => (
+        <li className={cn('item')} key={index}>
+          <Link className={cn('link')} to={link.path}>{translate(link.title)}</Link>
+        </li>))
+      }
+    </ul>
   );
 }
 
 NavigationMenu.propTypes = {
-  title: PropTypes.string,
-  sum: PropTypes.number,
-  amount: PropTypes.number,
-  onOpen: PropTypes.func,
+  navLinks: PropTypes.array,
 };
 
 NavigationMenu.defaultProps = {
-  sum: 0
+  navLinks: [{title: 'home', path: '/'}]
 }
 
 export default memo(NavigationMenu);

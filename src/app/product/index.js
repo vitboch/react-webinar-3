@@ -5,7 +5,8 @@ import PageLayout from '../../components/page-layout';
 import {useParams} from 'react-router-dom';
 import CardProduct from '../../components/card-product';
 import Loader from '../../components/loader';
-import NavigationMenu from '../../components/navigation-menu';
+import Head from '../../components/head';
+import BasketTool from '../../components/basket-tool';
 
 function Product() {
   const store = useStore();
@@ -33,8 +34,8 @@ function Product() {
     <PageLayout>
       {product ? (
         <>
-          <NavigationMenu
-            title={product.title}
+          <Head title={product.title}/>
+          <BasketTool
             sum={sum}
             amount={amount}
             onOpen={callbacks.openModalBasket}
