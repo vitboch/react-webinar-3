@@ -1,9 +1,9 @@
 import {memo} from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat} from '../../utils';
 import {useTranslation} from '../../store/translator';
+import NavigationMenu from '../navigation-menu';
 import './style.css';
 
 function Item(props) {
@@ -16,9 +16,9 @@ function Item(props) {
 
   return (
     <div className={cn()}>
-      <Link to={`product/${props.item._id}`} className={cn('title')}>
-        {props.item.title}
-      </Link>
+      <NavigationMenu
+        className={cn('menu')}
+        navLinks={[{title: `${props.item.title}`, path: `product/${props.item._id}`}]}/>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
         <button onClick={callbacks.onAdd}>{translate('add')}</button>

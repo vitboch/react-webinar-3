@@ -13,7 +13,9 @@ function NavigationMenu({navLinks}) {
     <ul className={cn()}>
       {navLinks.map((link, index) => (
         <li className={cn('item')} key={index}>
-          <Link className={cn('link')} to={link.path}>{translate(link.title)}</Link>
+          <Link className={translate(link.title) ? cn('link') : cn('link-black')}
+                to={link.path}>{translate(link.title) || link.title}
+          </Link>
         </li>))
       }
     </ul>

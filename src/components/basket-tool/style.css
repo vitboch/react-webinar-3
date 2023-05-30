@@ -1,11 +1,19 @@
 .BasketTool {
     display: flex;
     justify-content: flex-end;
-    padding: 20px;
+    padding: 0 10px;
     font-size: 18px;
+}
+
+.BasketTool-wrap {
+    padding: 20px 10px;
+}
+
+.BasketTool-label {
+    margin-right: 20px;
 }
 
 .BasketTool-total {
     font-weight: bold;
-    margin: 0 20px;
+    margin-right: 20px;
 }

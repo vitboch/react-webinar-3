@@ -14,14 +14,16 @@ function BasketTool({sum, amount, onOpen}) {
   return (
     <div className={cn()}>
       <NavigationMenu className={cn('menu')} navLinks={navLinks}/>
-      <span className={cn('label')}>{translate('inBasket')}</span>
-      <span className={cn('total')}>
+      <div className={cn('wrap')}>
+        <span className={cn('label')}>{translate('inBasket')}</span>
+        <span className={cn('total')}>
         {amount
           ? `${amount} ${plural(amount, translate('inBasketItem'))} / ${numberFormat(sum)} ₽`
           : translate('empty')
         }
       </span>
-      <button onClick={onOpen}>{translate('goTo')}</button>
+        <button onClick={onOpen}>{translate('goTo')}</button>
+      </div>
     </div>
   );
 }

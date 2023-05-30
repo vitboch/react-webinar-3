@@ -10,10 +10,16 @@
 
 .NavigationMenu-item {
     margin-right: 10px;
+    padding: 20px 10px;
 }
 
 .NavigationMenu-link {
     font-weight: 400;
     line-height: 21px;
     color: #0087E9;
+}
+
+.NavigationMenu-link-black {
+    font-weight: 400;
+    line-height: 21px;
 }

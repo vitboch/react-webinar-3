@@ -19,7 +19,8 @@
   padding: 20px 10px;
 }
 
-.Item-title:hover {
+.Item-menu{
+  padding: 20px;
 }
 
 .Item-actions {
