@@ -1,13 +1,13 @@
-import {memo} from "react";
+import {memo} from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-function Controls({onAdd}){
+function Controls({onAdd}) {
   return (
-    <div className='Controls'>
+    <div className="Controls">
       <button onClick={() => onAdd()}>Добавить</button>
     </div>
-  )
+  );
 }
 
 Controls.propTypes = {
@@ -15,7 +15,8 @@ Controls.propTypes = {
 };
 
 Controls.defaultProps = {
-  onAdd: () => {}
-}
+  onAdd: () => {
+  }
+};
 
 export default memo(Controls);

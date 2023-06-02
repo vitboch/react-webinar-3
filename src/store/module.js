@@ -10,7 +10,7 @@ class StoreModule {
   }
 
   initState() {
-    return {}
+    return {};
   }
 
   getState() {
@@ -21,7 +21,7 @@ class StoreModule {
     this.store.setState({
       ...this.store.getState(),
       [this.name]: newState
-    }, description)
+    }, description);
   }
 
 }

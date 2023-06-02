@@ -1,5 +1,5 @@
-import React, {memo} from "react";
-import PropTypes from "prop-types";
+import React, {memo} from 'react';
+import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
 import './style.css';
 
@@ -17,8 +17,8 @@ function SideLayout({children, side, padding}) {
 SideLayout.propTypes = {
   children: PropTypes.node,
   side: PropTypes.oneOf(['start', 'end', 'between']),
-  padding: PropTypes.oneOf(['small', 'medium']),
-}
+  padding: PropTypes.oneOf(['small', 'medium'])
+};
 
 SideLayout.defaultProps = {};
 

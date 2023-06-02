@@ -1,10 +1,10 @@
-import {memo, useCallback, useMemo} from "react";
-import useTranslate from "../../hooks/use-translate";
-import useStore from "../../hooks/use-store";
-import useSelector from "../../hooks/use-selector";
-import Select from "../../components/select";
-import Input from "../../components/input";
-import SideLayout from "../../components/side-layout";
+import {memo, useCallback, useMemo} from 'react';
+import useTranslate from '../../hooks/use-translate';
+import useStore from '../../hooks/use-store';
+import useSelector from '../../hooks/use-selector';
+import Select from '../../components/select';
+import Input from '../../components/input';
+import SideLayout from '../../components/side-layout';
 
 function CatalogFilter() {
 
@@ -13,15 +13,18 @@ function CatalogFilter() {
   const select = useSelector(state => ({
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
+    category: state.catalog.params.category,
+    categories: state.catalog.categories
   }));
 
   const callbacks = {
     // Сортировка
     onSort: useCallback(sort => store.actions.catalog.setParams({sort}), [store]),
+    onSortByCategories: useCallback(category => store.actions.catalog.setParams({category, page: 1}), [store]),
     // Поиск
     onSearch: useCallback(query => store.actions.catalog.setParams({query, page: 1}), [store]),
     // Сброс
-    onReset: useCallback(() => store.actions.catalog.resetParams(), [store]),
+    onReset: useCallback(() => store.actions.catalog.resetParams(), [store])
   };
 
   const options = {
@@ -29,20 +32,26 @@ function CatalogFilter() {
       {value: 'order', title: 'По порядку'},
       {value: 'title.ru', title: 'По именованию'},
       {value: '-price', title: 'Сначала дорогие'},
-      {value: 'edition', title: 'Древние'},
-    ]), [])
+      {value: 'edition', title: 'Древние'}
+    ]), []),
+    categories: useMemo(() => ([{value: '', title: 'Все'}, ...select.categories.map(category => ({
+        value: category._id,
+        title: `${Array(category.level).fill('-').join(' ')} ${category.title}`
+      })
+    )]), [select.categories])
   };
 
   const {t} = useTranslate();
 
   return (
-    <SideLayout padding='medium'>
+    <SideLayout padding="medium">
+      <Select options={options.categories} value={select.category} onChange={callbacks.onSortByCategories}/>
       <Select options={options.sort} value={select.sort} onChange={callbacks.onSort}/>
       <Input value={select.query} onChange={callbacks.onSearch} placeholder={'Поиск'}
              delay={1000}/>
       <button onClick={callbacks.onReset}>{t('filter.reset')}</button>
     </SideLayout>
-  )
+  );
 }
 
 export default memo(CatalogFilter);

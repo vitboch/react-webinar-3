@@ -1,6 +1,6 @@
 import {memo} from 'react';
-import PropTypes from "prop-types";
-import {cn as bem} from '@bem-react/classname'
+import PropTypes from 'prop-types';
+import {cn as bem} from '@bem-react/classname';
 import './style.css';
 
 function Pagination(props) {
@@ -32,7 +32,7 @@ function Pagination(props) {
       e.preventDefault();
       props.onChange(number);
     }
-  }
+  };
 
   const cn = bem('Pagination');
   return (
@@ -51,7 +51,7 @@ function Pagination(props) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 Pagination.propTypes = {
@@ -60,14 +60,14 @@ Pagination.propTypes = {
   count: PropTypes.number,
   indent: PropTypes.number,
   onChange: PropTypes.func,
-  makeLink: PropTypes.func,
-}
+  makeLink: PropTypes.func
+};
 
 Pagination.defaultProps = {
   page: 1,
   limit: 10,
   count: 1000,
-  indent: 1,
-}
+  indent: 1
+};
 
 export default memo(Pagination);

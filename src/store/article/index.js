@@ -1,4 +1,4 @@
-import StoreModule from "../module";
+import StoreModule from '../module';
 
 /**
  * Детальная ифнормация о товаре для страницы товара
@@ -9,7 +9,7 @@ class ArticleState extends StoreModule {
     return {
       data: {},
       waiting: false // признак ожидания загрузки
-    }
+    };
   }
 
   /**
