@@ -4,5 +4,10 @@
 }
 
 .Input_theme_big {
-  width: 300px;
+  width: 308px;
+}
+
+.Input_theme_small {
+  margin-bottom: 20px;
+  width: 203px;
 }

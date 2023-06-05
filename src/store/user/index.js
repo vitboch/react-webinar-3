@@ -34,7 +34,17 @@ class UserState extends StoreModule {
         headers: {'Content-Type': 'application/json'}
       });
 
-      const {result} = await response.json();
+      const json = await response.json();
+      const result = json.result;
+
+      // Сохраняем ошибку от сервера из ответа
+      const errorMessage = json.error?.data.issues[0].message;
+      if (errorMessage) {
+        return this.setState({
+          ...this.getState(),
+          error: errorMessage ? errorMessage : null
+        });
+      }
 
       // Сохраняем токен в localStorage
       localStorage.setItem('token', result['token']);
@@ -51,7 +61,6 @@ class UserState extends StoreModule {
       // Ошибка при загрузке
       // @todo В стейт можно положить информацию об ошибке
       this.setState({
-        error: e.message,
         waiting: false
       });
     }

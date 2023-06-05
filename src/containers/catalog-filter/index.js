@@ -14,7 +14,7 @@ function CatalogFilter() {
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
     category: state.catalog.params.category,
-    categories: state.catalog.categories
+    categories: state.categories.list
   }));
 
   const callbacks = {
@@ -34,11 +34,10 @@ function CatalogFilter() {
       {value: '-price', title: 'Сначала дорогие'},
       {value: 'edition', title: 'Древние'}
     ]), []),
-    categories: useMemo(() => ([{value: '', title: 'Все'}, ...select.categories.map(category => ({
-        value: category._id,
-        title: `${Array(category.level).fill('-').join(' ')} ${category.title}`
-      })
-    )]), [select.categories])
+    categories: useMemo(() => ([{
+      value: '',
+      title: 'Все'
+    }, ...select.categories]), [select.categories])
   };
 
   const {t} = useTranslate();
@@ -47,7 +46,7 @@ function CatalogFilter() {
     <SideLayout padding="medium">
       <Select options={options.categories} value={select.category} onChange={callbacks.onSortByCategories}/>
       <Select options={options.sort} value={select.sort} onChange={callbacks.onSort}/>
-      <Input value={select.query} onChange={callbacks.onSearch} placeholder={'Поиск'}
+      <Input theme={'big'} value={select.query} onChange={callbacks.onSearch} placeholder={'Поиск'}
              delay={1000}/>
       <button onClick={callbacks.onReset}>{t('filter.reset')}</button>
     </SideLayout>

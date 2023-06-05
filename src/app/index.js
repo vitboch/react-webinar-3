@@ -20,11 +20,11 @@ function App() {
   useInit(() => {
     store.actions.catalog.initParams();
     store.actions.user.getInfo();
+    store.actions.categories.load();
   }, [], true);
 
   const isAuth = useSelector(state => state.user.isAuth);
 
-  console.log(isAuth);
   return (
     <>
       <Routes>

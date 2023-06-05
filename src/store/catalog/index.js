@@ -20,8 +20,7 @@ class CatalogState extends StoreModule {
         category: ''
       },
       count: 0,
-      waiting: false,
-      categories: []
+      waiting: false
     };
   }
 
@@ -91,15 +90,12 @@ class CatalogState extends StoreModule {
 
     const response = await fetch(`/api/v1/articles?${new URLSearchParams(apiParams)}`);
     const json = await response.json();
-    const responseCategories = await fetch('/api/v1/categories?fields=*&limit=*');
-    const categoryList = await responseCategories.json();
 
     this.setState({
       ...this.getState(),
       list: json.result.items,
       count: json.result.count,
-      waiting: false,
-      categories: categoryList.result.items
+      waiting: false
     }, 'Загружены списки товаров и категорий из АПИ');
   }
 }
