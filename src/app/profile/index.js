@@ -7,12 +7,13 @@ import UserCard from '../../components/user-card';
 
 function Profile() {
   const user = useSelector(state => state.user);
+  const session = useSelector(state => state.session);
   const {t} = useTranslate();
 
   return (
     <PageLayout>
       <Navbar/>
-      <UserCard user={user} t={t}/>
+      <UserCard user={user} t={t} session={session}/>
     </PageLayout>
   );
 }

@@ -1,15 +1,12 @@
 import StoreModule from '../module';
 
 /**
- * Детальная ифнормация о пользователе для страницы профиль
+ * Детальная ифнормация о сессии пользователя
  */
 class UserState extends StoreModule {
 
   initState() {
     return {
-      name: '',
-      phone: '',
-      email: '',
       isAuth: false, // авторизация пользователя
       waiting: false, // признак ожидания загрузки
       error: null
@@ -18,11 +15,8 @@ class UserState extends StoreModule {
 
   removeError() {
     this.setState({
-      name: '',
-      phone: '',
-      email: '',
-      isAuth: false, // авторизация пользователя
-      waiting: false, // признак ожидания загрузки
+      isAuth: false,
+      waiting: false,
       error: null
     });
   }
@@ -35,6 +29,7 @@ class UserState extends StoreModule {
   async signIn(data) {
     // Установка признака ожидания загрузки
     this.setState({
+      ...this.getState(),
       waiting: true
     });
 
@@ -62,13 +57,12 @@ class UserState extends StoreModule {
 
       // Пользователь загружен успешно
       this.setState({
-        name: result.user.profile.name,
-        phone: result.user.profile.phone,
-        email: result.user.email,
+        error: null,
         isAuth: true,
         waiting: false
       }, 'Данные о пользователе загружены из АПИ');
     } catch (e) {
+      console.log(e);
       // Ошибка при загрузке
       // @todo В стейт можно положить информацию об ошибке
       this.setState({
@@ -100,9 +94,6 @@ class UserState extends StoreModule {
         localStorage.removeItem('token');
 
         this.setState({
-          name: '',
-          phone: '',
-          email: '',
           isAuth: false,
           waiting: false,
           error: null
@@ -135,14 +126,9 @@ class UserState extends StoreModule {
         }
       });
 
-      const {result} = await response.json();
-
       // Пользователь загружен успешно
       this.setState({
-        name: result.profile.name,
-        phone: result.profile.phone,
-        email: result.email,
-        isAuth: true,
+        ...this.getState(),
         waiting: false
       }, 'Данные о пользователе загружены из АПИ');
 
@@ -150,10 +136,6 @@ class UserState extends StoreModule {
       // Ошибка при загрузке
       // @todo В стейт можно положить информацию об ошибке
       this.setState({
-        name: '',
-        phone: '',
-        email: '',
-        isAuth: false,
         waiting: false
       });
     }

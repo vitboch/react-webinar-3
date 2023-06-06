@@ -11,11 +11,12 @@ function LoginForm() {
   const store = useStore();
   const {t} = useTranslate();
   const cn = bem('LoginForm');
-  const error = useSelector(state => state.user.error);
+  const error = useSelector(state => state.session.error);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const [loginNode, passwordNode] = e.target;
+    store.actions.session.signIn({login: loginNode.value, password: passwordNode.value});
     store.actions.user.signIn({login: loginNode.value, password: passwordNode.value});
   };
 
@@ -33,7 +34,6 @@ function LoginForm() {
         </div>
       </form>
     </SideLayout>
-
   );
 }
 

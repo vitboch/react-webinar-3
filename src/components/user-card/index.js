@@ -5,11 +5,11 @@ import SideLayout from '../side-layout';
 import Spinner from '../spinner';
 import './style.css';
 
-function UserCard({user, t}) {
+function UserCard({user,session, t}) {
   const cn = bem('UserCard');
 
   return (
-    <Spinner active={user.waiting}>
+    <Spinner active={session.waiting}>
       <SideLayout className={cn()} side={'start'} padding={'medium'}>
         <div className={cn('wrap')}>
           <h2 className={cn('title')}>{t('profile')}</h2>
@@ -27,6 +27,8 @@ UserCard.propTypes = {
     name: PropTypes.string,
     phone: PropTypes.string,
     email: PropTypes.string,
+  }).isRequired,
+  session: PropTypes.shape({
     waiting: PropTypes.bool
   }).isRequired,
   t: PropTypes.func

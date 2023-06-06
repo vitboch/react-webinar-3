@@ -6,13 +6,14 @@ import PageLayout from '../page-layout';
 import Navbar from '../../containers/navbar';
 
 function ProtectedRoute({isAuth, location = '/', children}) {
-  const select = useSelector(state => ({
+  const {error, waiting} = useSelector(state => ({
+    error: state.session.error,
     waiting: state.user.waiting
   }));
 
-  return (select.waiting
+  return (waiting && !error
     ? (<PageLayout><Navbar/></PageLayout>)
-    : (isAuth ? (<>{children}</>) : (<Navigate to={!select.waiting && location}/>)))
+    : (isAuth ? (<>{children}</>) : (<Navigate to={location}/>)));
 }
 
 ProtectedRoute.propTypes = {
