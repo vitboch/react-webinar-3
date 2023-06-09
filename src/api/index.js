@@ -6,10 +6,10 @@ class APIService {
    */
   constructor(services, config = {}) {
     this.services = services;
-    this.config = config
+    this.config = config;
     this.defaultHeaders = {
-      'Content-Type': 'application/json',
-    }
+      'Content-Type': 'application/json'
+    };
   }
 
   /**
@@ -25,7 +25,7 @@ class APIService {
     const res = await fetch(url, {
       method,
       headers: {...this.defaultHeaders, ...headers},
-      ...options,
+      ...options
     });
     return {data: await res.json(), status: res.status, headers: res.headers};
   }

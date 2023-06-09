@@ -1,9 +1,9 @@
-import {memo, useCallback} from "react";
-import SideLayout from "../../components/side-layout";
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import useTranslate from "../../hooks/use-translate";
-import useSelector from "../../hooks/use-selector";
-import useStore from "../../hooks/use-store";
+import {memo, useCallback} from 'react';
+import SideLayout from '../../components/side-layout';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
+import useTranslate from '../../hooks/use-translate';
+import useSelector from '../../hooks/use-selector';
+import useStore from '../../hooks/use-store';
 
 function TopHead() {
 
@@ -26,8 +26,8 @@ function TopHead() {
     // Отмена авторизации
     onSignOut: useCallback(() => {
       store.actions.session.signOut();
-    }, []),
-  }
+    }, [])
+  };
 
   return (
     <SideLayout side="end" padding="small">

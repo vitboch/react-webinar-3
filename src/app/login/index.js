@@ -1,17 +1,17 @@
-import {memo, useCallback, useState} from "react";
-import useTranslate from "../../hooks/use-translate";
-import Head from "../../components/head";
-import LocaleSelect from "../../containers/locale-select";
-import Navigation from "../../containers/navigation";
-import PageLayout from "../../components/page-layout";
-import Input from "../../components/input";
-import Field from "../../components/field";
-import SideLayout from "../../components/side-layout";
-import TopHead from "../../containers/top-head";
-import {useLocation, useNavigate} from "react-router-dom";
-import useStore from "../../hooks/use-store";
-import useSelector from "../../hooks/use-selector";
-import useInit from "../../hooks/use-init";
+import {memo, useCallback, useState} from 'react';
+import useTranslate from '../../hooks/use-translate';
+import Head from '../../components/head';
+import LocaleSelect from '../../containers/locale-select';
+import Navigation from '../../containers/navigation';
+import PageLayout from '../../components/page-layout';
+import Input from '../../components/input';
+import Field from '../../components/field';
+import SideLayout from '../../components/side-layout';
+import TopHead from '../../containers/top-head';
+import {useLocation, useNavigate} from 'react-router-dom';
+import useStore from '../../hooks/use-store';
+import useSelector from '../../hooks/use-selector';
+import useInit from '../../hooks/use-init';
 
 
 function Login() {
@@ -23,7 +23,7 @@ function Login() {
 
   useInit(() => {
     store.actions.session.resetErrors();
-  })
+  });
 
   const select = useSelector(state => ({
     waiting: state.session.waiting,
@@ -62,7 +62,7 @@ function Login() {
         <LocaleSelect/>
       </Head>
       <Navigation/>
-      <SideLayout padding='medium'>
+      <SideLayout padding="medium">
         <form onSubmit={callbacks.onSubmit}>
           <h2>{t('auth.title')}</h2>
           <Field label={t('auth.login')} error={select.errors?.login}>

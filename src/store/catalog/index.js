@@ -1,5 +1,5 @@
-import StoreModule from "../module";
-import exclude from "../../utils/exclude";
+import StoreModule from '../module';
+import exclude from '../../utils/exclude';
 
 /**
  * Состояние каталога - параметры фильтра исписок товара
@@ -22,7 +22,7 @@ class CatalogState extends StoreModule {
       },
       count: 0,
       waiting: false
-    }
+    };
   }
 
   /**
@@ -72,7 +72,7 @@ class CatalogState extends StoreModule {
 
     // Сохранить параметры в адрес страницы
     let urlSearch = new URLSearchParams(exclude(params, this.initState().params)).toString();
-    const url = window.location.pathname + (urlSearch ? `?${urlSearch}`: '') + window.location.hash;
+    const url = window.location.pathname + (urlSearch ? `?${urlSearch}` : '') + window.location.hash;
     if (replaceHistory) {
       window.history.replaceState({}, '', url);
     } else {

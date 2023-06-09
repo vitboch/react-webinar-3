@@ -1,7 +1,7 @@
 // Начальное состояние
 const initialState = {
   name: ''
-}
+};
 
 // Обработчик действий
 function reducer(state = initialState, action) {

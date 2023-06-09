@@ -1,7 +1,7 @@
-import {memo} from "react";
+import {memo} from 'react';
 import PropTypes from 'prop-types';
-import {cn as bem} from "@bem-react/classname";
-import {Link} from "react-router-dom";
+import {cn as bem} from '@bem-react/classname';
+import {Link} from 'react-router-dom';
 import './style.css';
 
 function Menu({items, onNavigate}) {
@@ -14,21 +14,22 @@ function Menu({items, onNavigate}) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 Menu.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
     key: PropTypes.number,
     link: PropTypes.string,
-    title: PropTypes.string,
+    title: PropTypes.string
   })),
   onNavigate: PropTypes.func
-}
+};
 
 Menu.defaultProps = {
   items: [],
-  onNavigate: () => {}
-}
+  onNavigate: () => {
+  }
+};
 
 export default memo(Menu);

@@ -20,6 +20,6 @@ export default {
         //Ошибка загрузки
         dispatch({type: 'article/load-error'});
       }
-    }
-  },
-}
+    };
+  }
+};

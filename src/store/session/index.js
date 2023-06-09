@@ -1,5 +1,5 @@
-import StoreModule from "../module";
-import simplifyErrors from "../../utils/simplify-errors";
+import StoreModule from '../module';
+import simplifyErrors from '../../utils/simplify-errors';
 
 /**
  * Сессия
@@ -119,7 +119,7 @@ class SessionState extends StoreModule {
    * Сброс ошибок авторизации
    */
   resetErrors() {
-    this.setState({...this.initState(), errors: null})
+    this.setState({...this.initState(), errors: null});
   }
 }
 

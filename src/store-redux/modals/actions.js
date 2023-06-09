@@ -12,6 +12,6 @@ export default {
    * @param name
    */
   close: () => {
-    return {type: 'modal/close'}
+    return {type: 'modal/close'};
   }
-}
+};

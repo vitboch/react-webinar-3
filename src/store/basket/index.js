@@ -1,4 +1,4 @@
-import StoreModule from "../module";
+import StoreModule from '../module';
 
 /**
  * Покупательская корзина
@@ -10,7 +10,7 @@ class BasketState extends StoreModule {
       list: [],
       sum: 0,
       amount: 0
-    }
+    };
   }
 
   /**

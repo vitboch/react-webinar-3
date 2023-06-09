@@ -18,6 +18,6 @@ const config = {
   api: {
     baseUrl: ''
   }
-}
+};
 
 export default config;

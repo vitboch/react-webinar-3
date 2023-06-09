@@ -1,4 +1,4 @@
-import {memo} from "react";
+import {memo} from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
@@ -14,7 +14,7 @@ function Select(props) {
         <option key={item.value} value={item.value}>{item.title}</option>
       ))}
     </select>
-  )
+  );
 }
 
 Select.propTypes = {
@@ -27,7 +27,8 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
-  onChange: () => {}
-}
+  onChange: () => {
+  }
+};
 
 export default memo(Select);

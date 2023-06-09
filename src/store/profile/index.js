@@ -1,4 +1,4 @@
-import StoreModule from "../module";
+import StoreModule from '../module';
 
 /**
  * Детальная информация о пользователе
@@ -9,7 +9,7 @@ class ProfileState extends StoreModule {
     return {
       data: {},
       waiting: false // признак ожидания загрузки
-    }
+    };
   }
 
   /**

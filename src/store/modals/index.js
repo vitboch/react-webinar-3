@@ -1,18 +1,18 @@
-import StoreModule from "../module";
+import StoreModule from '../module';
 
 class ModalsState extends StoreModule {
 
   initState() {
     return {
       name: null
-    }
+    };
   }
 
-  open(name){
+  open(name) {
     this.setState({name}, `Открытие модалки ${name}`);
   }
 
-  close(){
+  close() {
     this.setState({name: null}, `Закрытие модалки`);
   }
 }

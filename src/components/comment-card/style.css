@@ -1,0 +1,46 @@
+.CommentCard {
+  margin: 0 40px 30px;
+}
+
+.CommentCard:last-child {
+  padding-bottom: 82px;
+}
+
+.CommentCard-wrap {
+  display: flex;
+}
+
+.CommentCard-title {
+  margin: 0 10px 10px 0;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.CommentCard-title-span {
+  display: inline-block;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #666;
+}
+
+.CommentCard-description {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.CommentCard-wrapper {
+  padding-top: 30px;
+}
+
+.CommentCard-btn-1 {
+  padding: 0;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #0087E9;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
