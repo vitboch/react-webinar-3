@@ -6,9 +6,18 @@ import formatDate from '../../utils/format-data';
 import AuthMessage from '../auth-message';
 import CommentForm from '../comment-form';
 
-function CommentCard({comment, exists, commentId, placeholder, onAnswer, onSignIn, onCancel, onSubmit}) {
+function CommentCard({comment, exists, commentId, lastId, onAnswer, onSignIn, onCancel, onSubmit}) {
   const cn = bem('CommentCard');
   const paddingLeft = `${Math.min(comment.level * 30, 700)}px`;
+
+  const handleClick = () => {
+    setTimeout(() => {
+      exists
+        ? document.getElementById('my-text-area').focus()
+        : document.getElementById('my-button').focus();
+    }, 1);
+    onAnswer(comment);
+  };
 
   return (
     <div className={cn()} style={{paddingLeft}}>
@@ -17,8 +26,8 @@ function CommentCard({comment, exists, commentId, placeholder, onAnswer, onSignI
         <span className={cn('title-span')}>{formatDate(comment.date)}</span>
       </div>
       <p className={cn('description')}>{comment.text}</p>
-      <button className={cn('btn-1')} onClick={() => onAnswer(comment.id, comment.author)}>Ответить</button>
-      {commentId === comment.id && (!exists
+      <button className={cn('btn-1')} onClick={handleClick}>Ответить</button>
+      {lastId === comment.id && (!exists
         ? <AuthMessage
           text={', чтобы иметь возможность ответить. '}
           onSignIn={onSignIn}
@@ -27,7 +36,6 @@ function CommentCard({comment, exists, commentId, placeholder, onAnswer, onSignI
         />
         : <CommentForm
           title={'Новый ответ'}
-          placeholder={placeholder}
           onCancel={onCancel}
           onSubmit={onSubmit}
         />)}
@@ -39,7 +47,7 @@ CommentCard.propTypes = {
   comment: PropTypes.object.isRequired,
   exists: PropTypes.bool.isRequired,
   commentId: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  lastId: PropTypes.string,
   onAnswer: PropTypes.func.isRequired,
   onSignIn: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,

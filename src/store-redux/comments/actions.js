@@ -11,10 +11,10 @@ export default {
 
       try {
         const res = await services.api.request({
-          url: `/api/v1/comments?search[parent]=${id}&limit=*&fields=items(_id,text,dateCreate,author(profile(name)),parent(_id,_type)),count`
+          url: `/api/v1/comments?search[parent]=${id}&limit=*&fields=items(*,author(profile(name)))`
         });
         // Коментарии загружены успешно
-        dispatch({type: 'comments/load-success', payload: {data: res.data.result}});
+        dispatch({type: 'comments/load-success', payload: {data: res.data.result.items}});
 
       } catch (e) {
         //Ошибка загрузки
@@ -33,23 +33,20 @@ export default {
    */
   add: (_id, _type, text, cb) => {
     return async (dispatch, getState, services) => {
-      // Сброс текущего товара и установка признака ожидания загрузки
-      dispatch({type: 'comments/load-start'});
+      // Установка признака ожидания загрузки
+      dispatch({type: 'comments/create-start'});
 
       try {
-        const res = await services.api.request({
-          url: '/api/v1/comments',
+        const response = await services.api.request({
+          url: `/api/v1/comments?fields=_id,text,dateCreate,author(profile(name)),parent(_id,_type)`,
           method: 'POST',
           body: JSON.stringify({text, 'parent': {_id, _type}})
         });
-
-        cb();
-        // Коментарии добавлен успешно
-        dispatch({type: 'comments/load-success', payload: {data: res.data.result}});
+        // Коментарий добавлен успешно
+        dispatch({type: 'comments/create-success', payload: {data: response.data.result}});
 
       } catch (e) {
-        //Ошибка загрузки
-        dispatch({type: 'comments/load-error'});
+        dispatch({type: 'comments/create-error'});
       }
     };
   }

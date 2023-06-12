@@ -26,6 +26,7 @@
 
 .CommentCard-description {
   margin: 0 0 10px 0;
+  word-break: break-all;
   font-size: 14px;
   line-height: 16px;
 }

@@ -1,6 +1,5 @@
-import {memo, useCallback, useMemo, useState} from 'react';
+import {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
-import useInit from '../../hooks/use-init';
 import {useDispatch} from 'react-redux';
 import useSelector from '../../hooks/use-selector';
 import {useSelector as useSelectorRedux} from 'react-redux/es/hooks/useSelector';
@@ -14,19 +13,14 @@ import CommentCard from '../../components/comment-card';
 import AuthMessage from '../../components/auth-message';
 import CommentForm from '../../components/comment-form';
 
-
 function CommentList({articleId}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [commentId, setCommentId] = useState('');
-  const [commenterName, setCommenterName] = useState('');
-
-  useInit(() => {
-    dispatch(commentsActions.load(articleId));
-  }, [articleId]);
+  const [lastId, setLastId] = useState(undefined);
 
   const {data, waiting} = useSelectorRedux(state => ({
-    data: state.comments.data.items,
+    data: state.comments.data,
     waiting: state.comments.waiting
   }));
 
@@ -48,16 +42,24 @@ function CommentList({articleId}) {
         exists
       }));
     }
-
-    return null;
   }, [data]);
 
 
+  let currentId;
+  const ids = data?.filter(comment => comment.parent._id === commentId);
+  if (ids) {
+    currentId = ids.length ? ids[ids.length - 1]?._id : commentId;
+  }
+
+  useEffect(() => {
+    setLastId(currentId);
+  }, [currentId]);
+
+
   const callbacks = {
-    onAnswer: useCallback((_id, name) => {
-      setCommentId(_id);
-      setCommenterName(name);
-    }, [commentId, commenterName]),
+    onAnswer: useCallback(comment => {
+      setCommentId(comment.id);
+    }, [commentId]),
 
     onSignIn: useCallback(() => {
       navigate('/login', {state: {back: location.pathname}});
@@ -69,15 +71,15 @@ function CommentList({articleId}) {
 
     onSubmitArticle: useCallback(text => {
       dispatch(commentsActions.add(articleId, 'article', text, () => {
-        dispatch(commentsActions.load(articleId));
         setCommentId('');
+        setLastId('');
       }));
     }, [dispatch, commentId]),
 
     onSubmitComment: useCallback(text => {
       dispatch(commentsActions.add(commentId, 'comment', text, () => {
-        dispatch(commentsActions.load(articleId));
         setCommentId('');
+        setLastId('');
       }));
     }, [dispatch, commentId])
 
@@ -92,7 +94,7 @@ function CommentList({articleId}) {
           comment={comment}
           exists={exists}
           commentId={commentId}
-          placeholder={`Мой ответ для ${commenterName}`}
+          lastId={lastId}
           onAnswer={callbacks.onAnswer}
           onSignIn={callbacks.onSignIn}
           onCancel={callbacks.onCancel}
@@ -107,7 +109,6 @@ function CommentList({articleId}) {
         : <CommentForm
           title={'Новый комментарий'}
           commentId={commentId}
-          placeholder={'Текст'}
           onSubmit={callbacks.onSubmitArticle}
         />)}
     </Spinner>

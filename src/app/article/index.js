@@ -13,6 +13,7 @@ import TopHead from '../../containers/top-head';
 import {useDispatch, useSelector as useSelectorRedux} from 'react-redux';
 import shallowequal from 'shallowequal';
 import articleActions from '../../store-redux/article/actions';
+import commentsActions from '../../store-redux/comments/actions';
 import CommentList from '../../containers/comment-list';
 
 function Article() {
@@ -23,6 +24,7 @@ function Article() {
   useInit(() => {
     //store.actions.article.load(params.id);
     dispatch(articleActions.load(params.id));
+    dispatch(commentsActions.load(params.id));
   }, [params.id]);
   const select = useSelectorRedux(state => ({
     article: state.article.data,

@@ -8,8 +8,8 @@ function AuthMessage({text, commentId, onSignIn, onCancel}) {
 
   return (
     <div className={commentId === '' ? cn() : cn('card')}>
-      <button className={cn('btn-2')} onClick={onSignIn}>Войдите</button>
-      <span>{text}</span>
+      <button id={'my-button'} className={cn('btn-2')} onClick={onSignIn}>Войдите</button>
+      <span className={cn('span')}>{text}</span>
       {commentId !== '' && <button className={cn('btn-3')} onClick={onCancel}>Отмена</button>}
     </div>
   );
