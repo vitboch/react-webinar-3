@@ -18,6 +18,7 @@ function CommentList({articleId}) {
   const navigate = useNavigate();
   const [commentId, setCommentId] = useState('');
   const [lastId, setLastId] = useState(undefined);
+  const [paddingLeft, setPaddingLeft] = useState('0px');
 
   const {data, waiting} = useSelectorRedux(state => ({
     data: state.comments.data,
@@ -46,14 +47,17 @@ function CommentList({articleId}) {
 
 
   let currentId;
+  let currentState;
   const ids = data?.filter(comment => comment.parent._id === commentId);
   if (ids) {
     currentId = ids.length ? ids[ids.length - 1]?._id : commentId;
+    currentState = ids.length !== 0 ? '0px' : '30px';
   }
 
   useEffect(() => {
     setLastId(currentId);
-  }, [currentId]);
+    setPaddingLeft(currentState);
+  }, [currentId, currentState]);
 
 
   const callbacks = {
@@ -67,6 +71,13 @@ function CommentList({articleId}) {
 
     onCancel: useCallback(() => {
       setCommentId('');
+      setTimeout(() => {
+        const elementId = exists ? 'my-text-area' : 'my-button';
+        document.getElementById(elementId).scrollIntoView({
+          block: 'center',
+          behavior: 'smooth'
+        });
+      }, 1);
     }, [commentId]),
 
     onSubmitArticle: useCallback(text => {
@@ -95,6 +106,7 @@ function CommentList({articleId}) {
           exists={exists}
           commentId={commentId}
           lastId={lastId}
+          padding={paddingLeft}
           onAnswer={callbacks.onAnswer}
           onSignIn={callbacks.onSignIn}
           onCancel={callbacks.onCancel}

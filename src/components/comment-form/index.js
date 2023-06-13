@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
 import './style.css';
 
-function CommentForm({title, commentId, onCancel, onSubmit}) {
+function CommentForm({title, commentId, padding, onCancel, onSubmit}) {
   const cn = bem('CommentForm');
   const [newComment, setNewComment] = useState('');
   const [error, setError] = useState(true);
+  const paddingLeft = padding;
+
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -22,8 +24,9 @@ function CommentForm({title, commentId, onCancel, onSubmit}) {
   };
 
   return (
-    <div className={cn()}>
-      <form className={commentId === '' ? cn('form') : cn('form-card')} onSubmit={handleSubmit}>
+    <div className={cn()} style={{paddingLeft}}>
+      <form className={commentId === '' ? cn('form') : cn('form-card')}
+            onSubmit={handleSubmit}>
         <div className={cn('title')}>{title}</div>
         <textarea
           id={'my-text-area'}
@@ -44,6 +47,7 @@ function CommentForm({title, commentId, onCancel, onSubmit}) {
 CommentForm.propTypes = {
   title: PropTypes.string,
   commentId: PropTypes.string,
+  nested: PropTypes.object,
   onCancel: PropTypes.func,
   onSubmit: PropTypes.func
 };

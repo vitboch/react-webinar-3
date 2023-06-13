@@ -6,15 +6,17 @@ import formatDate from '../../utils/format-data';
 import AuthMessage from '../auth-message';
 import CommentForm from '../comment-form';
 
-function CommentCard({comment, exists, commentId, lastId, onAnswer, onSignIn, onCancel, onSubmit}) {
+function CommentCard({comment, exists, commentId, lastId, padding, onAnswer, onSignIn, onCancel, onSubmit}) {
   const cn = bem('CommentCard');
   const paddingLeft = `${Math.min(comment.level * 30, 700)}px`;
 
   const handleClick = () => {
     setTimeout(() => {
-      exists
-        ? document.getElementById('my-text-area').focus()
-        : document.getElementById('my-button').focus();
+      const elementId = exists ? 'my-text-area' : 'my-button';
+      document.getElementById(elementId).scrollIntoView({
+        block: 'center',
+        behavior: 'smooth'
+      });
     }, 1);
     onAnswer(comment);
   };
@@ -30,12 +32,14 @@ function CommentCard({comment, exists, commentId, lastId, onAnswer, onSignIn, on
       {lastId === comment.id && (!exists
         ? <AuthMessage
           text={', чтобы иметь возможность ответить. '}
-          onSignIn={onSignIn}
           commentId={commentId}
+          padding={padding}
+          onSignIn={onSignIn}
           onCancel={onCancel}
         />
         : <CommentForm
           title={'Новый ответ'}
+          padding={padding}
           onCancel={onCancel}
           onSubmit={onSubmit}
         />)}
@@ -48,6 +52,7 @@ CommentCard.propTypes = {
   exists: PropTypes.bool.isRequired,
   commentId: PropTypes.string.isRequired,
   lastId: PropTypes.string,
+  padding: PropTypes.string,
   onAnswer: PropTypes.func.isRequired,
   onSignIn: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
